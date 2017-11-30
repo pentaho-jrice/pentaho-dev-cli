@@ -1,0 +1,18 @@
+
+
+
+-- cli organization
+
+pentaho 
+  apps
+    pdi
+      install
+      update
+      start
+      stop
+      logs
+    server
+    ael
+    pad
+  build
+  

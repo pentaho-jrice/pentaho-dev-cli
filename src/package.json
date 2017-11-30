@@ -1,0 +1,35 @@
+{
+  "name": "pentaho-cli",
+  "version": "1.0.0",
+  "description": "A command line tool for Pentaho Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pentaho-jrice/pentaho-dev-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "pentaho",
+    "devops"
+  ],
+  "author": "Joe Rice",
+  "license": "Apache-2.0",
+  "bin": {
+    "pentaho": "./pentaho.js"
+  },
+  "bugs": {
+    "url": "https://github.com/pentaho-jrice/pentaho-dev-cli/issues"
+  },
+  "homepage": "https://github.com/pentaho-jrice/pentaho-dev-cli#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "clear": "0.0.1",
+    "clui": "^0.3.6",
+    "commander": "^2.12.1",
+    "simple-git": "^1.82.0",
+    "tabtab": "^2.2.2"
+  }
+}
