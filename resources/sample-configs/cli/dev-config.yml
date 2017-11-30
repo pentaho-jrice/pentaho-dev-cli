@@ -1,0 +1,49 @@
+current-version:
+  version-string: 8.1-ABZU-TEST-60
+  version-parts:
+    major:           8
+    minor:           1
+    type:            ABZU-TEST
+    build-number:    60
+    version-pattern: ${major}.${minor}-${type}-${build-number}
+
+active-projects:
+  -
+
+global:
+  base-git-dir:
+    - os:  windows
+      dir: C:\git\pentaho
+
+    - os:  linux
+      dir: /home/vagrant/git
+
+  base-pentaho-app-dir:
+    - os:  windows
+      dir: C:\dev\dist
+
+    - os:  linux
+      dir: /home/vagrant/pentaho/dist
+
+  base-pentaho-download-dir:
+    - os:  windows
+      dir: C:\dev\downloads
+
+    - os:  linux
+      dir: /home/vagrant/pentaho/downloads
+
+projects:
+  - name:                     pentaho-ee
+    git-dir:                  pentaho-ee
+    master-branch:            master
+    dev-remote:               origin
+    upstream-remote:          upstream
+    active-feature-branches:
+      - BACKLOG-234234
+      - BACKLOG-23422
+
+applications:
+  - name:         PDI Enterprise Edition
+    id:           pdi-ee-client
+    app-type:     client
+    install-type: packaged
