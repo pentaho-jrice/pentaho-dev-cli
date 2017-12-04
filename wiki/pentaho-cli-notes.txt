@@ -1,6 +1,3 @@
-
-
-
 -- cli organization
 
 pentaho 
@@ -16,3 +13,134 @@ pentaho
     pad
   build
   
+  
+  
+**Notes on Context**
+
+* Config
+  - apps
+  - projects
+  - global
+  - active-projects
+* runtime-env
+  - local-apps
+  - local-git-projects
+  - remote-builds
+  
+
+3 sweeps of initialization when running command.
+
+1) Get Config
+   -  Do you have required config files?
+   -  Do you have optional config files?
+   -  Yes?
+      + Add contents from existing files into context
+   -  No?
+      + Build missing config content
+      + Save config to file
+      + Add new config content into context
+   
+	1.1) Build the config files (if necessary)
+	   - Ask user to use defaults?  Or enter custom
+	   - Use defaults?
+	     + copy default config files to config dir
+	   - Use custom?
+	     + prompt user for values
+
+2) Get Cache
+   - Do you have all cache files?  
+   - Do we need to run a new cache build?
+     + Did user explicitly say to re-populate cache?
+     + Is it time to run a new?  (based on timestamp last run)
+   - Yes?
+     + Build the cache
+     + Save the cache to file
+     + add new cache content to context
+     + return context from cache
+   - No?
+     + Add contents from existing cache files to context
+
+	2.1) Build the cache (if necessary)
+	   - What local git projects do you have?
+	     + which are in config, but not in local
+	     + which are in local, but not in config
+	     
+	   - What local pentaho apps do you have? 
+	     + which are in config, but not in local
+	     + which are in local, but not in config
+	     
+	   - What are the latest remote build versions & apps?
+	     + which are in config, but not in local
+	     + which are in local, but not in config
+
+3) Run analysis on runtime env
+   
+4) Run operation
+
+
+modules & functions
+
+cliContext
+  - functions
+    + initializeCliContext
+    + scanCliEnv
+  - fields
+    + configContext
+    + runtimeContext
+    + cliEnv
+
+
+configContext
+  - functions
+    + initializeConfigContext
+    + scanConfigContextEnv
+    + loadConfigContextFromFile
+    + initConfigContextFromResources
+    + initConfigContextFromUser
+  - fields
+    + appsConfig
+    + projectsConfig
+    + globalConfig
+    + activeProjectsConfig
+    
+rutimeContext
+  - functions
+    + initializeRuntimeContext
+    + scanRuntimeContextEnv
+    + loadLocalAppsContextFromCache
+    + buildLocalAppsContext
+    + loadLocalGitProjectsContextFromCache
+    + buildLocalGitProjectsContext
+    + loadRemoteBuildVersionContextFromCache
+    + buildRemoteBuildVersionsContext
+    + loadRemoteBuildAppsContextFromCache
+    + buildRemoteBuildAppsContext
+  - Fields
+    + localAppsContext
+    + localGitProjectsContext
+    + remoteBuildVersionsContext
+    + remoteBuildAppsContext
+    
+cliEnv
+  - configEnv
+  - runtimeEnv
+
+ConfigEnv
+  - configDirExists
+  - devConfigFileExists
+  - workspaceConfigFileExists
+
+RuntimeEnv
+  - localAppsContextCacheFileExists
+  - localAppsContextCacheLasUpdateTimestamp
+  - localGitProjectsContextCacheExists
+  - localGitProjectsContextCacheLastUpdatedTimestamp
+  - remoteBuildVersionsContextCacheExists
+  - remoteBuildVersionsContextCacheLastUpdatedTimestamp
+  - remoteBuildAppsContextCacheExists
+  - remoteBuildAppsContextCacheLastUpdatedTimestamp
+
+* runtime-env
+  - local-apps
+  - local-git-projects
+  - remote-builds

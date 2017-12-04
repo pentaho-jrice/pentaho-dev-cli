@@ -1,0 +1,11 @@
+current-version:
+  version-string: 8.1-ABZU-TEST-60
+  version-parts:
+    major:           8
+    minor:           1
+    type:            ABZU-TEST
+    build-number:    60
+    version-pattern: ${major}.${minor}-${type}-${build-number}
+
+active-projects:
+  - 
