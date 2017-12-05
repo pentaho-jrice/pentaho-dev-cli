@@ -1,5 +1,9 @@
 const fs = require('fs');
 const moment = require('moment');
+const request = require('request');
+const cheerio = require('cheerio');
+var Stopwatch = require("node-stopwatch").Stopwatch;
+
 const config = require('../config/default-config');
 const fsUtils = require('../../commons/util/file-utils');
 
@@ -11,6 +15,7 @@ module.exports = {
             // TODO add error handling.  If RuntimeEnv is null for any reason, exit script
         }
 
+
         let localAppRuntimeEnv = cliContext.envs.runtimeEnv.localAppRuntime;
 
         if (localAppRuntimeEnv != null && !localAppRuntimeEnv.cacheBuildIsNeeded) {
@@ -18,6 +23,7 @@ module.exports = {
         } else {
             runtimeContext.localAppsContext = buildLocalAppsContext(cliContext, runtimeContext, localAppRuntimeEnv);
         }
+
 
         let localGitProjectRuntime = cliContext.envs.runtimeEnv.localGitProjectRuntime;
 
@@ -31,18 +37,18 @@ module.exports = {
         let remoteBuildAppRuntime = cliContext.envs.runtimeEnv.remoteBuildAppRuntime;
 
         if (remoteBuildAppRuntime != null && !remoteBuildAppRuntime.cacheBuildIsNeeded) {
-            runtimeContext.remoteBuildVersionsContext = loadRemoteBuildAppsContextFromCache(cliContext, runtimeContext, remoteBuildAppRuntime);
+            runtimeContext.remoteBuildAppsContext = loadRemoteBuildAppsContextFromCache(cliContext, runtimeContext, remoteBuildAppRuntime);
         } else {
-            runtimeContext.remoteBuildVersionsContext = buildRemoteBuildAppsContext(cliContext, runtimeContext, remoteBuildAppRuntime);
+            runtimeContext.remoteBuildAppsContext = buildRemoteBuildAppsContext(cliContext, runtimeContext, remoteBuildAppRuntime);
         }
 
 
         let remoteBuildVersionRuntime = cliContext.envs.runtimeEnv.remoteBuildVersionRuntime;
 
         if (remoteBuildVersionRuntime != null && !remoteBuildVersionRuntime.cacheBuildIsNeeded) {
-            runtimeContext.remoteBuildAppsContext = loadRemoteBuildVersionContextFromCache(cliContext, runtimeContext, remoteBuildVersionRuntime);
+            runtimeContext.remoteBuildVersionsContext = loadRemoteBuildVersionContextFromCache(cliContext, runtimeContext, remoteBuildVersionRuntime);
         } else {
-            runtimeContext.remoteBuildAppsContext = buildRemoteBuildVersionsContext(cliContext, runtimeContext, remoteBuildVersionRuntime);
+            runtimeContext.remoteBuildVersionsContext = buildRemoteBuildVersionsContext(cliContext, runtimeContext, remoteBuildVersionRuntime);
         }
 
         return runtimeContext;
@@ -141,7 +147,7 @@ function scanRuntimeContextEnvEntry(cacheConfig) {
 
     if (runtimeContextEnvEntry.cacheMeta.nextScheduledRunTimestamp == null || !moment(runtimeContextEnvEntry.cacheMeta.nextScheduledRunTimestamp).isValid()) {
         let lastRunTimestamp = moment(runtimeContextEnvEntry.cacheMeta.lastRunTimestamp);
-        runtimeContextEnvEntry.cacheMeta.nextScheduledRunTimestamp = lastRunTimestamp.add(cacheConfig.cacheDurationSecions, 'seconds');
+        runtimeContextEnvEntry.cacheMeta.nextScheduledRunTimestamp = lastRunTimestamp.add(cacheConfig.cacheDurationSeconds, 'seconds');
     }
 
     if (runtimeContextEnvEntry.cacheMeta.nextScheduledRunTimestamp < moment()) {
@@ -207,7 +213,83 @@ function loadRemoteBuildVersionContextFromCache(cliContext, runtimeContext, runt
 }
 
 function buildRemoteBuildVersionsContext(cliContext, runtimeContext, runtimeEnv) {
+    let stopwatch = Stopwatch.create();
+    let buildVersionsRuntimeContext = new BuildVersionsRuntimeContext();
+    let cacheMeta = startBuildContext(stopwatch, config.defaultConfig.remoteBuildVersionsRuntimeCache);
 
+    // html = fs.readFileSync("/home/vagrant/git/pentaho-dev-cli/resources/sample-response-files/pentaho-build-versions-page-response.html");
+    // buildJavaScriptFile(buildVersionsRuntimeContext, html);
+
+     request(config.defaultConfig.appDownloadSites.pentahoBuild.url, function(error, response, html){
+         if(!error){
+             buildJavaScriptFile(buildVersionsRuntimeContext, html);
+         }
+     });
+
+    stopBuildContext(cacheMeta, stopwatch, config.defaultConfig.remoteBuildVersionsRuntimeCache);
+
+    buildVersionsRuntimeContext.cacheMeta = cacheMeta;
+
+    return buildVersionsRuntimeContext;
+}
+
+function buildJavaScriptFile(buildVersionsRuntimeContext, html) {
+    let majorVersions = [];
+
+    let $ = cheerio.load(html);
+
+    $('tr').each(function(i, element){
+        let appsPageUrl = $(this).find("td").eq(1).find("a").attr("href");
+        let versionString = $(this).find("td").eq(1).find("a").text();
+        let lasModifiedDate = $(this).find("td").eq(2).text();
+
+        if (appsPageUrl != null && versionString != "Parent Directory") {
+            let majorVersion = new MajorVersion();
+
+            majorVersion.versionInfo = {}
+            majorVersion.versionInfo.versionString = versionString;
+
+            majorVersion.urls = {}
+            majorVersion.urls.buildSiteUrl = config.defaultConfig.appDownloadSites.pentahoBuild.url + appsPageUrl;
+
+            majorVersion.lastModifiedDate = lasModifiedDate;
+
+            majorVersions.push(majorVersion)
+        }
+    });
+
+    buildVersionsRuntimeContext.majorVersions = majorVersions;
+}
+
+class CacheMeta {
+
+}
+
+class BuildVersionsRuntimeContext {
+
+}
+
+class MajorVersion {
+
+}
+
+function startBuildContext(stopwatch, runtimeCache) {
+    cacheMeta = new CacheMeta();
+
+    stopwatch.start();
+
+    return cacheMeta;
+}
+
+function stopBuildContext(cacheMeta, stopwatch, runtimeCache) {
+    stopwatch.stop();
+
+    cacheMeta.lastRunTimestamp = moment();
+    cacheMeta.lastRunDurationMilis = stopwatch.elapsedMilliseconds;
+    cacheMeta.lastRunDurationDisplay = stopwatch.elapsed.seconds + " seconds";
+    cacheMeta.nextScheduledRunTimestamp = cacheMeta.lastRunTimestamp.add(runtimeCache.cacheDurationSeconds, 'seconds');
+
+    return cacheMeta;
 }
 
 function loadRemoteBuildAppsContextFromCache(cliContext, runtimeContext, runtimeEnv) {

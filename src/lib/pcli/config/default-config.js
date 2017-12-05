@@ -12,30 +12,30 @@ module.exports = {
         "localAppRuntimeCache" : {
             "displayName": "Local Apps",
             "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/local-app-runtime-cache.json",
-            "cacheDurationSecions": 28800
+            "cacheDurationSeconds": 28800
         },
         "localGitProjectRuntimeCache" : {
             "displayName": "Local Git Projects",
             "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/local-git-project-runtime-cache.json",
-            "cacheDurationSecions": 28800
+            "cacheDurationSeconds": 28800
         },
         "remoteBuildAppRuntimeCache" : {
             "displayName": "Remote Build Apps",
             "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/remote-build-apps-runtime-cache.json",
-            "cacheDurationSecions": 14400
+            "cacheDurationSeconds": 14400
         },
         "remoteBuildVersionsRuntimeCache" : {
             "displayName": "Remote Build Versions",
             "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/remote-build-versions-runtime-cache.json",
-            "cacheDurationSecions": 14400
+            "cacheDurationSeconds": 14400
         },
         "testCacheNotExist" : {
             "displayName": "Remote Build Versions",
             "cacheFilePath": os.homedir + "c:\filedoes\notexist",
-            "cacheDurationSecions": 14400
+            "cacheDurationSeconds": 14400
         },
         "appDownloadSites": {
-            "build.pentaho": {
+            "pentahoBuild": {
                 "url": "http://build.pentaho.com/hosted/"
             }
         }

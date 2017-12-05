@@ -16,7 +16,7 @@ module.exports = {
         cliContext.contexts.configContext = configContextBuilder.initalizeConfigContext(cliContext);
         cliContext.contexts.runtimeContext = runtimeContextBuilder.initializeRuntimeContext(cliContext);
 
-        console.log("\n\ninitalizeCliContext:  " + JSON.stringify(cliContext, null, 2));
+        console.log("\n\ninitalizeCliContext:  " + JSON.stringify(cliContext, null, 4));
 
         return cliContext;
     },
