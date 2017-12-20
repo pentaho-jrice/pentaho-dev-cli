@@ -29,9 +29,9 @@ module.exports = {
             "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/remote-build-versions-runtime-cache.json",
             "cacheDurationSeconds": 14400
         },
-        "testCacheNotExist" : {
+        "tempCliContextCache" : {
             "displayName": "Remote Build Versions",
-            "cacheFilePath": os.homedir + "c:\filedoes\notexist",
+            "cacheFilePath": os.homedir + "/.pentaho/dev/cli/.cache/cli-context-runtime-cache.json",
             "cacheDurationSeconds": 14400
         },
         "appDownloadSites": {

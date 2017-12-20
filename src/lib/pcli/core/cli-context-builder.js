@@ -5,8 +5,6 @@ const runtimeContextBuilder = require('./runtime-context-builder');
 
 module.exports = {
     initalizeCliContext: function() {
-        console.log("\n\n\ncli-context!!!!......\n\n\n");
-
         let cliContext = new this.CliContext();
 
         cliContext.contexts = new this.CliContextEntries();
@@ -17,6 +15,15 @@ module.exports = {
         cliContext.contexts.runtimeContext = runtimeContextBuilder.initializeRuntimeContext(cliContext);
 
         console.log("\n\ninitalizeCliContext:  " + JSON.stringify(cliContext, null, 4));
+
+        try {
+            fs.writeFileSync(config.defaultConfig.tempCliContextCache.cacheFilePath, JSON.stringify(cliContext, null, 2), 'utf8');
+        } catch (e) {
+            // TODO add more robust error messaging.  In this case, we're going to return null so we can build a new context.
+            // But need to log a warning.
+            console.log("Warning.  Error trying to write Clic Context cache to file:  '" + config.defaultConfig.tempCliContextCache.cacheFilePath + "'.  .  Error:  '" + e + "'");
+            return null;
+        }
 
         return cliContext;
     },

@@ -78,7 +78,7 @@ pentaho
 4) Run operation
 
 
-modules & functions
+** modules & functions
 
 cliContext
   - functions
@@ -144,3 +144,32 @@ RuntimeEnv
   - local-apps
   - local-git-projects
   - remote-builds
+  
+  
+** Filename patterns
+
+* Does NOT have major version in name
+  - shims packages
+    + version type in name
+      - pentaho-hadoop-shims-cdh511-package-71-SHIM-QAT-587-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-71-SHIM-QAT-586-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-71-SHIM-QAT-586.zip
+      - pentaho-hadoop-shims-cdh511-package-80-SHIM-QAT-72-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-80-SHIM-QAT-72.zip
+    + version type NOT in name
+      - 8.1.0.0-TEST-TIAMAT - 
+      - pentaho-hadoop-shims-cdh511-package-81.2018.04.00-TEST-TIAMAT-227-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-81.2018.04.00-TEST-TIAMAT-227.zip
+      - 8.1.0-TEST
+      - pentaho-hadoop-shims-cdh511-package-81.2018.04.00-TEST-ENLIL-19-dist.zip
+      - 8.0.0.0
+      - pentaho-hadoop-shims-cdh511-package-80.2017.10.00-28-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-80.2017.10.00-28.zip
+      - 8.1-QAT
+      - pentaho-hadoop-shims-cdh511-package-81.2018.04.00-114-dist.zip
+      - pentaho-hadoop-shims-cdh511-package-81.2018.04.00-114.zip
+      
+* suffix contains either of these
+  -  none
+  - dist
+  - os type
