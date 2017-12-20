@@ -57,10 +57,10 @@
       <file leaf-file-name="runtime-context-builder.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/pcli/core/runtime-context-builder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="449" column="50" lean-forward="false" selection-start-line="449" selection-start-column="50" selection-end-line="449" selection-end-column="50" />
+            <state relative-caret-position="159">
+              <caret line="449" column="77" lean-forward="false" selection-start-line="449" selection-start-column="77" selection-end-line="449" selection-end-column="77" />
               <folding>
-                <marker date="1513743939068" expanded="true" signature="8930:9204" ph="..." />
+                <marker date="1513744420879" expanded="true" signature="8930:9204" ph="..." />
               </folding>
             </state>
           </provider>
@@ -156,8 +156,8 @@
       <find>parseAppBuildInfoFromTableRow</find>
       <find>console.loog</find>
       <find>console.log</find>
-      <find>parseBuildAppaHtml</find>
       <find>majorVersion</find>
+      <find>parseBuildAppaHtml</find>
     </findStrings>
     <dirStrings>
       <dir>C:\git\pentaho\pentaho-dev-cli\src</dir>
@@ -357,12 +357,12 @@
       <workItem from="1512346016206" duration="53924000" />
       <workItem from="1512676465738" duration="4998000" />
       <workItem from="1512681570284" duration="52923000" />
-      <workItem from="1513572043619" duration="49265000" />
+      <workItem from="1513572043619" duration="49746000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203198000" />
+    <option name="totallyTimeSpent" value="203679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -487,7 +487,7 @@
         <state relative-caret-position="6825">
           <caret line="325" column="0" lean-forward="true" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
           <folding>
-            <marker date="1513743939068" expanded="true" signature="8930:9204" ph="..." />
+            <marker date="1513744420879" expanded="true" signature="8930:9204" ph="..." />
           </folding>
         </state>
       </provider>
@@ -566,7 +566,7 @@
         <state relative-caret-position="4914">
           <caret line="234" column="56" lean-forward="false" selection-start-line="234" selection-start-column="56" selection-end-line="234" selection-end-column="56" />
           <folding>
-            <marker date="1513743939068" expanded="true" signature="8930:9204" ph="..." />
+            <marker date="1513744420879" expanded="true" signature="8930:9204" ph="..." />
           </folding>
         </state>
       </provider>
@@ -614,7 +614,7 @@
         <state relative-caret-position="210">
           <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding>
-            <marker date="1513743939068" expanded="true" signature="8930:9204" ph="..." />
+            <marker date="1513744420879" expanded="true" signature="8930:9204" ph="..." />
           </folding>
         </state>
       </provider>
@@ -801,10 +801,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pcli/core/runtime-context-builder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="449" column="50" lean-forward="false" selection-start-line="449" selection-start-column="50" selection-end-line="449" selection-end-column="50" />
+        <state relative-caret-position="159">
+          <caret line="449" column="77" lean-forward="false" selection-start-line="449" selection-start-column="77" selection-end-line="449" selection-end-column="77" />
           <folding>
-            <marker date="1513743939068" expanded="true" signature="8930:9204" ph="..." />
+            <marker date="1513744420879" expanded="true" signature="8930:9204" ph="..." />
           </folding>
         </state>
       </provider>

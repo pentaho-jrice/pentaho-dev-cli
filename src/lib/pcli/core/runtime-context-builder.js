@@ -415,7 +415,7 @@ function isValidAppDownloadPage($) {
     return true;
 }
 
-function parseBuildAppaHtml(majorVersion, runtimeContext, majorVersionUrl, html) {
+function parseBuildAppaHtml(majorVersion, runtimeContext, html) {
     let appDescriptors = [];
     let majorVersionUrl = majorVersion.urls.buildSiteUrl;
 
@@ -447,7 +447,7 @@ function parseBuildAppaHtml(majorVersion, runtimeContext, majorVersionUrl, html)
 
         appDescriptor.lasModifiedDate = buildInfo.lastModifiedDate;
         appDescriptor.buildNumber = buildInfo.buildNumber;
-        appDescriptor.majorVersion = majorVersion;
+        appDescriptor.majorVersionId = majorVersion.versionInfo.versionString;
 
         if (appDescriptor.appName != null && appDescriptor.appName.length > 0) {
             let appInfo;
